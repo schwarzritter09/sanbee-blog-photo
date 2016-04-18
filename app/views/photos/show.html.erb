@@ -7,8 +7,7 @@
 
 <p>
   <strong>Create member:</strong>
-  <%= @photo.create_member_id %>
+  <%= @photo.create_member.name %>
 </p>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
 <%= link_to 'Back', photos_path %>

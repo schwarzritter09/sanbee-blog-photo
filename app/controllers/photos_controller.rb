@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: [:show, :photo_get]
 
   # GET /photos
   # GET /photos.json
@@ -12,18 +12,21 @@ class PhotosController < ApplicationController
   def show
   end
 
-  # PATCH/PUT /photos/1
-  # PATCH/PUT /photos/1.json
-  def update
-    respond_to do |format|
-      if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @photo }
-      else
-        format.html { render :edit }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
-      end
+  # GET /photos/update_get
+  # GET /photos/update_get.json
+  def update_get
+    @datetime = params[:lastdt]
+    if @datetime.blank?
+      @photos = Photo.all
+    else
+      @photos = Photo.update_get @datetime
     end
+  end
+  
+  # GET /photo/:id/photo_get
+  # GET /photo/:id/photo_get.json
+  def photo_get
+    send_file SanbeeBlogPhoto::Application.config.img_path_root + @photo.path, :disposition => "inline"
   end
 
   private

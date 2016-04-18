@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<script type="text/javascript">
+			function post(){
+				console.log("start post");
+				
+				var action = document.getElementById("action").value;
+				console.log("action url : " + action);
+				
+				var data = document.getElementById("data").value;
+				console.log("data : " + data);
+				
+				var form = document.getElementById("form");
+				form.setAttribute("action", action + "?" + data);
+				form.submit();
+			}
+		</script>	
+	</head>
+	<body>
+		<form method="POST" id="form"></form>
+		post先:<input name="url" id="action" type="text" value="http://localhost:3000/tags/update_push"><br>
+		json:<textarea id="data">tags=[{photo_id=1, member_id=1}]</textarea><br>
+		<input type="button" value="送信" onClick="post()">
+	</body>
+</html>

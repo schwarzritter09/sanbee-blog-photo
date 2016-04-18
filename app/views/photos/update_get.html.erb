@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Photos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Path</th>
+      <th>Create member</th>
+      <th>Photo</th>
+      <th>Tags</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @photos.each do |photo| %>
+      <tr>
+        <td><%= photo.path %></td>
+        <td><%= photo.create_member.name %></td>
+        <td><%= image_tag photo_get_photo_path(photo) %></td>
+        <td>
+          <% photo.tags.each do |t| %>
+            <div class="tag">
+              <%= t.member.name %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
