@@ -12,8 +12,8 @@ CSV.foreach('db/member.csv') do |row|
   member = Member.find(row[0])
 
   if member.present?
-    member.update_attributes(:name => row[1])
+    member.update_attributes(:name => row[1], :unit_id => row[2])
   else
-    Member.create(:id => row[0], :name => row[1])
+    Member.create(:id => row[0], :name => row[1], :unit_id => [2])
   end
 end
