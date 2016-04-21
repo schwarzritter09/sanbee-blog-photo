@@ -1,13 +1,14 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Photo -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Path:</strong>
-  <%= @photo.path %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:path) %>:</strong></dt>
+  <dd><%= @photo.path %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:create_member_id) %>:</strong></dt>
+  <dd><%= @photo.create_member_id %></dd>
+</dl>
 
-<p>
-  <strong>Create member:</strong>
-  <%= @photo.create_member.name %>
-</p>
-
-<%= link_to 'Back', photos_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              photos_path, :class => 'btn btn-default'  %>
