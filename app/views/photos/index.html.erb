@@ -2,6 +2,7 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
+<%= form_tag photos_path, :method=>"get", :id=>"search-form" do %>
 <div class="panel-group" id="search">
   <div class="panel panel-default">
   	<div class="panel-heading">
@@ -11,13 +12,14 @@
   	  	</a>
   	  </h4>
   	</div>
-  	<div class="panel-body collapse" id="members">
-  	  <%= button_tag "検索", :class=>"btn btn-large btn-default search-button" %>
-  	  <%= search_panel %>
-  	  <%= button_tag "検索", :class=>"btn btn-large btn-default search-button" %>
-  	</div>
+  	  <div class="panel-body collapse" id="members">
+  	    <%= button_tag "検索する", :type=>"button", :class=>"btn btn-large btn-default search-button" %>
+  	    <%= search_panel %>
+  	    <%= button_tag "検索する", :type=>"button", :class=>"btn btn-large btn-default search-button" %>
+  	  </div>
   </div>
 </div>
+  	<% end %>
 <%= paginate(@photos) %>
 <div id="photos">
   <div class="row">

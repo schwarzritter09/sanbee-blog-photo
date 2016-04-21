@@ -27,8 +27,7 @@ jQuery ->
     bufferPx: 50
   
   $(".search-button").click ->
-    member_ids = []
-    $selects = $(".member-button.active")
-    $(".member-button.active").each ->
-      member_ids.push($(this).attr("data-member-id"))
-    console.log(member_ids)
+    $(".member-button.active input").each ->
+      $(this).prop("checked", true)
+      console.log($(this))
+    $("#search-form").submit()

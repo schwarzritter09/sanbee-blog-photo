@@ -32,7 +32,7 @@ module PhotosHelper
     content_tag :div, :class=>"btn-group", :data=>{:toggle=>"buttons"} do
       Member.where(unit_id: unit_id).each do |m|
         concat ( content_tag :label, :class=>"btn btn-large btn-primary member-button", :data=>{:member_id=>m.id} do
-          concat ( content_tag :input, :type=>"checkbox", :autocomplete=>"off", :checked=>true do
+          concat ( content_tag :input, :type=>"checkbox", :autocomplete=>"off", :name=>"photo_search[member_id][]", :value=>m.id do
             m.name
           end)
         end)
