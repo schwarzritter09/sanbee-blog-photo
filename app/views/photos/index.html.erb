@@ -4,7 +4,7 @@
 </div>
 <div class="row">
   <% @photos.each do |photo| %>
-    <div class="col-md-2">
+    <div class="col-xs-6 col-sm-4 col-md-2">
       <%= link_to image_tag(photo_get_photo_path(photo), :class => 'img-thumbnail img-responsive'),
                   photo_path(photo), :class => 'thumbnail' %>
     </div>
