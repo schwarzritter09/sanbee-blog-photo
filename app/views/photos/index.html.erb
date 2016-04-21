@@ -2,11 +2,25 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<div class="row">
-  <% @photos.each do |photo| %>
-    <div class="col-xs-6 col-sm-4 col-md-2">
-      <%= link_to image_tag(photo_get_photo_path(photo), :class => 'img-thumbnail img-responsive'),
-                  photo_path(photo), :class => 'thumbnail' %>
-    </div>
-  <% end %>
+<div class="panel-group" id="search">
+  <div class="panel panel-default">
+  	<div class="panel-heading">
+  	  <h4 class="panel-title">
+  	  	<a data-toggle="collapse", data-parent="#search" href="#members">
+  	  	  検索
+  	  	</a>
+  	  </h4>
+  	</div>
+  	<div class="panel-body collapse" id="members">
+  	  <%= button_tag "検索", :class=>"btn btn-large btn-default search-button" %>
+  	  <%= search_panel %>
+  	  <%= button_tag "検索", :class=>"btn btn-large btn-default search-button" %>
+  	</div>
+  </div>
+</div>
+<%= paginate(@photos) %>
+<div id="photos">
+  <div class="row">
+    <%= render @photos %>
+  </div>
 </div>
