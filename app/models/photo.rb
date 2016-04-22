@@ -12,8 +12,13 @@ class Photo < ActiveRecord::Base
     photos = Photo.all
 
     if photo_search
-      photos = photos.where(create_member_id: photo_search[:create_member_id]) if photo_search[:create_member_id].present?
-      photos = photos.has_tag_member_id(photo_search[:member_id]) if photo_search[:member_id].present?
+      if photo_search[:nothingtag].present?
+        not_target_ids = Photo.joins(:tags).uniq.pluck(:id)
+        photos = Photo.where.not(id: not_target_ids)
+        photo_search[:member_id] = nil
+      else
+        photos = photos.has_tag_member_id(photo_search[:member_id]) if photo_search[:member_id].present?
+      end
     end
 
     photos.order('id DESC')
