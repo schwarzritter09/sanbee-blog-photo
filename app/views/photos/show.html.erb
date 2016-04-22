@@ -6,8 +6,6 @@
 <dl class="dl-horizontal">
   <dt></dt>
   <dd><%= image_tag photo_get_photo_path(@photo), :class => 'img-responsive' %></dd>
-  <dt><strong>投稿者:</strong></dt>
-  <dd><%= @photo.create_member.name %></dd>
   <dt><strong>誰が写ってる？</strong></dt>
   <dd>
   	<% @photo.members.each do |m| %>
