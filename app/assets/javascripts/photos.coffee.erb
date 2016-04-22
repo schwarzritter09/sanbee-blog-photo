@@ -5,11 +5,13 @@ jQuery ->
   $(".tag-button").change ->
     $label = $(this)
     if !$label.hasClass("active")
+      console.log("ajax tag add")
       $.ajax
         type:"POST"
         url: "/tags/update_push.json"
         data: 'update_tags=[{"photo_id":' + $label.attr("data-photo-id") + ',"member_id":' + $label.attr("data-member-id") + ', "mode":"add"}]'
     else
+      console.log("ajax tag del")
       $.ajax
         type:"POST"
         url: "/tags/update_push.json"
@@ -17,7 +19,7 @@ jQuery ->
 
   $("#photos .row").infinitescroll
     loading: {
-      img:     "/assets/loading.gif"
+      img:     "<%= assets_path(loading.gif) %>"
       msgText: "ロード中..."
       finishedMsg: null
     }
@@ -25,8 +27,9 @@ jQuery ->
     nextSelector: "nav.pagination a[rel=next]"
     itemSelector: "#photos .photo"
     bufferPx: 50
-  
+
   $(".search-button").click ->
+    console.log("start search")
     $(".member-button.active input").each ->
       $(this).prop("checked", true)
       console.log($(this))
