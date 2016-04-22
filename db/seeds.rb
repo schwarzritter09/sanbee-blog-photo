@@ -9,7 +9,7 @@
 require "csv"
 
 CSV.foreach('db/member.csv') do |row|
-  member = Member.find(row[0])
+  member = Member.find_by_id(row[0])
 
   if member.present?
     member.update_attributes(:name => row[1], :unit_id => row[2])
