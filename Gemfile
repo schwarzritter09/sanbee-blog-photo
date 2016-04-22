@@ -61,3 +61,6 @@ gem 'capybara'
 
 # Use Paging
 gem 'kaminari'
+
+# Use jQuery on turbolinks
+gem 'jquery-turbolinks'
