@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root 'photos#index'
+
   resources :tags, :only => [:index] do
     post 'update_push', :on => :collection
     get 'update_get', :on => :collection
