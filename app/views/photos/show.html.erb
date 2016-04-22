@@ -6,17 +6,22 @@
 <dl class="dl-horizontal">
   <dt></dt>
   <dd><%= image_tag photo_get_photo_path(@photo), :class => 'img-responsive' %></dd>
-  <dt><strong>誰が写ってる？</strong></dt>
+  <dt><strong>元ページ</strong></dt>
   <dd>
-  	<% @photo.members.each do |m| %>
-  		<%= m.name %><br>
-  	<% end %>
+  	<%= link_to @photo.url, @photo.url %>
   </dd>
-  <dt><strong>写ってるメンバーを設定</strong></dt>
+  <dt><strong>誰が写ってる？</strong></dt>
   <dd>
   	<%= tag_panel @photo %>
   </dd>
 </dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              photos_path, :class => 'btn btn-default btn-lg'  %>
+<div class="row">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4 ">
+    <%= link_to "戻る", "#", :class => 'btn btn-default btn-lg back-button'  %>
+  </div>
+  <div class="col-md-4">
+  </div>
+</div>

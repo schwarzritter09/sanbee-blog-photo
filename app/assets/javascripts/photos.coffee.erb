@@ -1,7 +1,18 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
 jQuery ->
+  $(".back-button").click ->
+    history.back()
+  open_tag_panel = ->
+    $(".tag-button.active").parent().parent().each ->
+      $(this).addClass("in")
+  open_tag_panel()
+  open_search_panel = ->
+    $(".member-button.active").parent().parent().each ->
+      $(this).addClass("in")
+  open_search_panel()
   $(".tag-button").change ->
     $label = $(this)
     if !$label.hasClass("active")

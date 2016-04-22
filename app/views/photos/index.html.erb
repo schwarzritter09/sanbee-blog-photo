@@ -6,11 +6,11 @@
 <div class="panel-group" id="search">
   <div class="panel panel-default">
   	<div class="panel-heading">
-  	  <h4 class="panel-title">
+  	  <h3 class="panel-title">
   	  	<a data-toggle="collapse", data-parent="#search" href="#members">
   	  	  検索
   	  	</a>
-  	  </h4>
+  	  </h3>
   	</div>
   	  <div class="panel-body collapse" id="members">
   	    <%= button_tag "検索する", :type=>"button", :class=>"btn btn-lg btn-default search-button" %>
@@ -21,7 +21,7 @@
 </div>
   	<% end %>
 <%= paginate(@photos) %>
-<div id="photos">
+<div id="photos" class="container-fluid">
   <div class="row">
     <%= render @photos %>
   </div>

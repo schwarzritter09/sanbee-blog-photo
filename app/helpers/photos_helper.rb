@@ -1,6 +1,14 @@
 module PhotosHelper
 
   def search_panel
+    
+    searchMemberMap = {}
+    if params[:photo_search].present? && params[:photo_search][:member_id]
+      params[:photo_search][:member_id].each do |m|
+        searchMemberMap[m.to_s] = m
+      end
+    end
+    p searchMemberMap
 
     unitMap = {}
     unitMap[1] = "ロッカジャポニカ"
@@ -22,16 +30,19 @@ module PhotosHelper
           end)
         end)
         concat ( content_tag :div, :id=>"area#{id}", :class=>"panel-body collapse" do
-          concat search_buttons id
+          concat search_buttons id, searchMemberMap
         end)
       end
     end
   end
 
-  def search_buttons(unit_id)
+  def search_buttons(unit_id, searchMemberMap)
     content_tag :div, :class=>"btn-group", :data=>{:toggle=>"buttons"} do
       Member.where(unit_id: unit_id).each do |m|
-        concat ( content_tag :label, :class=>"btn btn-lg btn-default member-button", :data=>{:member_id=>m.id} do
+        p m
+        p searchMemberMap[m.id.to_s].present?
+        inActive = "active" if searchMemberMap[m.id.to_s].present?
+        concat ( content_tag :label, :class=>"btn btn-lg btn-default member-button #{inActive}", :data=>{:member_id=>m.id} do
           concat ( content_tag :input, :type=>"checkbox", :autocomplete=>"off", :name=>"photo_search[member_id][]", :value=>m.id do
             m.name
           end)
