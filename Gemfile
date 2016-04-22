@@ -64,3 +64,6 @@ gem 'kaminari'
 
 # Use jQuery on turbolinks
 gem 'jquery-turbolinks'
+
+# Use batch
+gem 'whenever'
