@@ -18,8 +18,12 @@
 
 <div class="row">
   <div class="col-md-4">
-  	<%= link_to "前の画像へ", photo_path(@photo.previous.id), :class => 'btn btn-default btn-lg' %>
-  	<%= link_to "前のタグづけしていない画像へ", photo_path(@photo.previous_notag.id), :class => 'btn btn-default btn-lg' %>
+  	<% if @photo.previous.present? %>
+      <%= link_to "前の画像へ", photo_path(@photo.previous), :class => 'btn btn-default btn-lg' %>
+    <% end %>
+  	<% if @photo.previous_notag.present? %>
+  	  <%= link_to "前のタグづけしていない画像へ", photo_path(@photo.previous_notag), :class => 'btn btn-default btn-lg' %>
+  	<% end %>
   </div>
   <div class="col-md-4 ">
   	<div class="btn-center">
@@ -27,7 +31,11 @@
     </div>
   </div>
   <div class="col-md-4">
-  	<%= link_to "次のタグ付けしていない画像へ", photo_path(@photo.next_notag.id), :class => 'btn btn-default btn-lg' %>
-  	<%= link_to "次の画像へ", photo_path(@photo.next.id), :class => 'btn btn-default btn-lg' %>
+  	<% if @photo.next_notag.present? %>
+  	  <%= link_to "次のタグ付けしていない画像へ", photo_path(@photo.next_notag), :class => 'btn btn-default btn-lg' %>
+  	<% end %>
+  	<% if @photo.next.present? %>
+  	  <%= link_to "次の画像へ", photo_path(@photo.next), :class => 'btn btn-default btn-lg' %>
+  	<% end %>
   </div>
 </div>
