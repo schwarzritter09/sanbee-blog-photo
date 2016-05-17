@@ -17,6 +17,7 @@ module PhotosHelper
     unitMap[4] = "リーフシトロン"
     unitMap[5] = "マジェスティック7"
     unitMap[6] = "ひとつのカテゴリー"
+    unitMap[7] = "その他"
 
     content_tag :div, :class=>"panel-group", :id=>"unit" do
       unitMap.each do |id, unit|
@@ -77,6 +78,7 @@ module PhotosHelper
     unitMap[4] = "リーフシトロン"
     unitMap[5] = "マジェスティック7"
     unitMap[6] = "ひとつのカテゴリー"
+    unitMap[7] = "その他"
 
     content_tag :div, :class=>"panel-group", :id=>"tag" do
       unitMap.each do |id, unit|
