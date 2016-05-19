@@ -7,6 +7,7 @@ class ScrapeAmeblo
 
   def scrapeImage(articleId, publishDate, imagepageUrl, downloadPath, isForce)
                
+    p "do get scrapeImage [imagepageUrl]"
     # 画像ページからオリジナルサイズ画像を取得
     # 画像が取得済みの場合スキップ
     savedImage = Photo.where(:url => imagepageUrl).first
@@ -50,6 +51,8 @@ class ScrapeAmeblo
   
 
   def scrapeArticle(articleUrl, downloadPath, isForce)
+    
+    p "do get scrapeArticle [articleUrl]"
     
     # 該当記事が取得済みの場合スキップ
     savedArticle = Article.where(:url => articleUrl).first
