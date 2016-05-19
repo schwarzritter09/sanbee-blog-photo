@@ -15,33 +15,37 @@
 </div>
 <br>
 <h1>登場回数ランキング</h1>
+(ヘッダタップでソートできます)
 <div class="table-responsive">
-  <table class="table table-striped table-bordered">
-    <tr>
-      <th>登場枚数</th>
-      <th>メンバー</th>
-    </tr>
-    <% @rankOfEntryCount.each do |member_id, count| %>
+  <table id="statistics" class="table table-striped table-bordered">
+  	<thead>
       <tr>
-        <td><%= count %></td>
-        <td><%= Member.find(member_id).name %></td>
+        <th>No.</th>
+        <th>名前</th>
+        <th>登場枚数</th>
+        <th>自撮り枚数</th>
+        <th>自撮り枚数/登場枚数</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @members.each do |m| %>
+        <tr>
+          <td><%= m.id %></td>
+          <td><%= m.name %></td>
+          <td><%= @ranks[m.id][:count] %></td>
+          <td><%= @ranks[m.id][:soloCount] %></td>
+          <td><%= @ranks[m.id][:ratio] %>%</td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
-</div>
-<br>
-<h1>自撮り枚数ランキング(一人で写っている写真)</h1>
-<div class="table-responsive">
-  <table class="table table-striped table-bordered">
-    <tr>
-      <th>自撮り枚数</th>
-      <th>メンバー</th>
-    </tr>
-    <% @rankOfSoloEntryCount.each do |member_id, count| %>
-      <tr>
-        <td><%= count %></td>
-        <td><%= Member.find(member_id).name %></td>
-      </tr>
-    <% end %>
-  </table>
-</div>
+</div><script type="text/javascript">
+$('table#statistics').dataTable({
+  
+    "bPaginate": false,
+    "bFilter": false,
+    "bSort": true,
+    "bInfo": false,
+    "bAutoWidth": false	
+});
+</script>
