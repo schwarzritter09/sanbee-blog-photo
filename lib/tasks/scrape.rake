@@ -25,8 +25,13 @@ namespace :scrape do
     
     as = Article.where("title is null")
     as.each do |a|
-      sa = ScrapeAmeblo.new
-      sa.scrapeArticle(a.url, save_dir, true)
+      
+      begin
+        sa = ScrapeAmeblo.new
+        sa.scrapeArticle(a.url, save_dir, true)
+      rescue => e
+        retry
+      end
     end
   end
 end
