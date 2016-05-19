@@ -67,7 +67,6 @@ class ScrapeAmeblo
     
       # セッションを終了
       articleSession.driver.quit
-      articleSession.clear
       
       # 投稿日付を取得
       publishDate = article.css(".skin-entryPubdate time").first.content

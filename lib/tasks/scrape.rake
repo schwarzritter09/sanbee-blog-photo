@@ -35,7 +35,7 @@ namespace :scrape do
         p "<<ameblo scrape [#{a.url}] ERROR : #{e.message}>>"
         Rails.logger.error "<<ameblo scrape [#{a.url}] ERROR : #{e.message}>>"
       
-        retry
+        next
       end
     end
   end
