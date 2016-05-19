@@ -27,6 +27,7 @@ namespace :scrape do
     as.each do |a|
       
       begin
+        p "do get [#{a.url}]"
         sa = ScrapeAmeblo.new
         sa.scrapeArticle(a.url, save_dir, true)
       rescue => e
