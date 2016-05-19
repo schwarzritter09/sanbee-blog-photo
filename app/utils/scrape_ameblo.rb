@@ -9,8 +9,8 @@ class ScrapeAmeblo
                
     # 画像ページからオリジナルサイズ画像を取得
     # 画像が取得済みの場合スキップ
-    downloadedImage = Photo.where(:url => imagepageUrl).first
-    if isForce || downloadedImage.nil?
+    savedImage = Photo.where(:url => imagepageUrl).first
+    if isForce || savedImage.nil?
               
       # 画像ページをJavaScript動作込で取得
       imagepageSession = Capybara::Session.new(:poltergeist)
@@ -37,13 +37,13 @@ class ScrapeAmeblo
       end
           
       # 画像をDBへ登録
-       if downloadedImage.nil?
-        photo = Photo.create :path=>fileName, :create_member_id=>1, :url=>imagepageUrl, :created_at=>publishDate, :article_id=>articleId
+      if savedImage.nil?
+        savedImage = Photo.create :path=>fileName, :create_member_id=>1, :url=>imagepageUrl, :created_at=>publishDate, :article_id=>articleId
       else
         # 登録済みの場合には、作成日付を更新する
-        downloadedImage.created_at = publishDate
-        downloadedImage.article_id = articleId
-        downloadedImage.save
+        savedImage.created_at = publishDate
+        savedImage.article_id = articleId
+        savedImage.save
       end
     end
   end
@@ -52,7 +52,7 @@ class ScrapeAmeblo
   def scrapeArticle(articleUrl, downloadPath, isForce)
     
     # 該当記事が取得済みの場合スキップ
-    downloadedArticle = Article.where(:url => articleUrl).first
+    savedArticle = Article.where(:url => articleUrl).first
     if isForce || downloadedArticle.nil?
         
       # 記事をJavaScript動作込で取得
@@ -79,8 +79,8 @@ class ScrapeAmeblo
       p title
      
       # 記事をDBに登録
-      if downloadedArticle.nil?
-        article = Article.create :url=>articleUrl, :created_at=>publishDate
+      if savedArticle.nil?
+        savedArticle = Article.create :url=>articleUrl, :created_at=>publishDate
       end
           
       # 画像ページリンク一覧を取得
@@ -89,27 +89,14 @@ class ScrapeAmeblo
         imagepageUrl = imagepageLink.attribute('href').value
         p imagepageUrl
         
-        if downloadedArticle.nil?
-          articleId = article.id
-        else
-          articleId = downloadedArticle.id
-        end
-        scrapeImage(articleId, publishDate, imagepageUrl, downloadPath, isForce)
+        scrapeImage(savedArticle.id, publishDate, imagepageUrl, downloadPath, isForce)
       end
       
       # 未完検知のため、titleなどの設定は画像ダウンロードが終わったあとに行う
-      if downloadedArticle.nil?
-        article.title = title
-        article.publish_member = theme
-        article.created_at = publishDate
-        article.save
-      else
-        # 登録済みの場合には作成日付を更新する
-        downloadedArticle.title = title
-        downloadedArticle.publish_member = theme
-        downloadedArticle.created_at = publishDate
-        downloadedArticle.save
-      end
+      savedArticle.title = title
+      savedArticle.publish_member = theme
+      savedArticle.created_at = publishDate
+      savedArticle.save
     end
   end
 
