@@ -79,13 +79,7 @@ class ScrapeAmeblo
      
       # 記事をDBに登録
       if downloadedArticle.nil?
-        article = Article.create :url=>articleUrl, :title=>title, :publish_member=>theme, :created_at=>publishDate
-      else
-        # 登録済みの場合には作成日付を更新する
-        downloadedArticle.title = title
-        downloadedArticle.publish_member = theme
-        downloadedArticle.created_at = publishDate
-        downloadedArticle.save
+        article = Article.create :url=>articleUrl, :created_at=>publishDate
       end
           
       # 画像ページリンク一覧を取得
@@ -100,6 +94,20 @@ class ScrapeAmeblo
           articleId = downloadedArticle.id
         end
         scrapeImage(articleId, publishDate, imagepageUrl, downloadPath, isForce)
+      end
+      
+      # 未完検知のため、titleなどの設定は画像ダウンロードが終わったあとに行う
+      if downloadedArticle.nil?
+        article.title = title
+        article.publish_member = theme
+        article.created_at = publishDate
+        downloadedArticle.save
+      else
+        # 登録済みの場合には作成日付を更新する
+        downloadedArticle.title = title
+        downloadedArticle.publish_member = theme
+        downloadedArticle.created_at = publishDate
+        downloadedArticle.save
       end
     end
   end
