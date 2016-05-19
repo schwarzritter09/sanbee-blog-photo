@@ -31,6 +31,10 @@ namespace :scrape do
         sa = ScrapeAmeblo.new
         sa.scrapeArticle(a.url, save_dir, true)
       rescue => e
+        
+        p "<<ameblo scrape [#{a.url}] ERROR : #{e.message}>>"
+        Rails.logger.error "<<ameblo scrape [#{a.url}] ERROR : #{e.message}>>"
+      
         retry
       end
     end

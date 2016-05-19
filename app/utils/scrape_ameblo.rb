@@ -127,6 +127,7 @@ class ScrapeAmeblo
       end
     
     rescue => e
+      p "<<ameblo scrape [#{url}] ERROR : #{e.message}>>"
       Rails.logger.error "<<ameblo scrape [#{url}] ERROR : #{e.message}>>"
     end
   end
