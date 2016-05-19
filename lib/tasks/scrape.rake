@@ -18,4 +18,15 @@ namespace :scrape do
     s = ScrapeAmeblo.new
     s.scrape(url, save_dir, force_mode)
   end
+  
+  task :article => :environment do
+    
+    save_dir = SanbeeBlogPhoto::Application.config.img_path_root
+    
+    as = Article.where("title is null")
+    as.each do |a|
+      sa = ScrapeAmeblo.new
+      sa.scrapeArticle(a.url, save_dir, true)
+    end
+  end
 end
