@@ -53,7 +53,7 @@ class ScrapeAmeblo
     
     # 該当記事が取得済みの場合スキップ
     savedArticle = Article.where(:url => articleUrl).first
-    if isForce || downloadedArticle.nil?
+    if isForce || savedArticle.nil?
         
       # 記事をJavaScript動作込で取得
       articleSession = Capybara::Session.new(:poltergeist)
