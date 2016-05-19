@@ -30,8 +30,8 @@ class ScrapeAmeblo
         p articleUrl
         
         # 該当記事が取得済みの場合スキップ
-        downloadedArticle = Article.where(:url => articleUrl)
-        if isForce || downloadedArticle.empty?
+        downloadedArticle = Article.where(:url => articleUrl).first
+        if isForce || downloadedArticle.nil?
         
           # 記事をJavaScript動作込で取得
           articleSession = Capybara::Session.new(:poltergeist)
@@ -43,6 +43,18 @@ class ScrapeAmeblo
           # セッションを終了
           articleSession.driver.quit
       
+          # 投稿日付を取得
+          publishDate = article.css(".skin-entryPubdate time").first.content
+          p publishDate
+          
+          # テーマ(投稿メンバー)を取得
+          theme = article.css(".skin-entryThemes dd a").first.content
+          p theme
+          
+          # タイトルを取得
+          title = article.css(".skin-entryTitle a").first.content
+          p title
+      
           # 画像ページリンク一覧を取得
           imagepageLinks = article.css('a.detailOn')
           imagepageLinks.each do |imagepageLink|
@@ -51,8 +63,8 @@ class ScrapeAmeblo
                     
             # 画像ページからオリジナルサイズ画像を取得
             # 画像が取得済みの場合スキップ
-            downloadedImage = Photo.where(:url => imagepageUrl)
-            if isForce || downloadedImage.empty?
+            downloadedImage = Photo.where(:url => imagepageUrl).first
+            if isForce || downloadedImage.nil?
                   
               # 画像ページをJavaScript動作込で取得
               imagepageSession = Capybara::Session.new(:poltergeist)
@@ -81,15 +93,23 @@ class ScrapeAmeblo
               end
           
               # 画像をDBへ登録
-              if downloadedImage.empty?
-                photo = Photo.create :path=>fileName, :create_member_id=>1, :url=>imagepageUrl
+              if downloadedImage.nil?
+                photo = Photo.create :path=>fileName, :create_member_id=>1, :url=>imagepageUrl, :created_at=>publishDate
+              else
+                # 登録済みの場合には、作成日付を更新する
+                downloadedImage.created_at = publishDate
+                downloadedImage.save
               end
             end
           end
           
           # 記事をDBに登録
-          if downloadedArticle.empty?
-            article = Article.create :url=>articleUrl
+          if downloadedArticle.nil?
+            article = Article.create :url=>articleUrl, :created_at=>publishDate
+          else
+            # 登録済みの場合には作成日付を更新する
+            downloadedArticle.created_at = publishDate
+            downloadedArticle.save
           end
         end
       end
