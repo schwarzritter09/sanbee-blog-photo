@@ -64,6 +64,7 @@ class ScrapeAmeblo
     
       # セッションを終了
       articleSession.driver.quit
+      articleSession.clear
       
       # 投稿日付を取得
       publishDate = article.css(".skin-entryPubdate time").first.content
@@ -101,7 +102,7 @@ class ScrapeAmeblo
         article.title = title
         article.publish_member = theme
         article.created_at = publishDate
-        downloadedArticle.save
+        article.save
       else
         # 登録済みの場合には作成日付を更新する
         downloadedArticle.title = title
