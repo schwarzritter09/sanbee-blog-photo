@@ -28,7 +28,7 @@ class PhotosController < ApplicationController
   # GET /photo/:id/photo_get
   # GET /photo/:id/photo_get.json
   def photo_get
-    send_file SanbeeBlogPhoto::Application.config.img_path_root + @photo.path, :disposition => "inline"
+    send_file SanbeeBlogPhoto::Application.config.img_path_root + @photo.path, :disposition => "inline", :status => "200"
   end
 
   # GET /photo/:id/photo_get_rev
@@ -38,7 +38,7 @@ class PhotosController < ApplicationController
     img = MiniMagick::Image.open(path)
     flop_img = img.flop
     
-    send_data flop_img.to_blob, :disposition => "inline", :filename => @photo.path, :type => "image/jpeg"
+    send_data flop_img.to_blob, :disposition => "inline", :filename => @photo.path, :type => "image/jpeg", :status => "200"
   end
   
   private
