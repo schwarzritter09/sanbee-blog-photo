@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :photos, :only => [:index, :show] do
     get 'update_get', :on => :collection
     get 'photo_get', :on => :member
+    get 'photo_get_rev', :on => :member
   end
   resources :statistics, :only=> [:index]
   # The priority is based upon order of creation: first created -> highest priority.

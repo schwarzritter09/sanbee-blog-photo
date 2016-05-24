@@ -67,3 +67,6 @@ gem 'jquery-turbolinks'
 
 # Use batch
 gem 'whenever'
+
+# Use flop image
+gem 'mini_magick'

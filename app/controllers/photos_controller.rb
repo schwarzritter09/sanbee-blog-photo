@@ -1,5 +1,7 @@
+require "mini_magick"
+
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show, :photo_get]
+  before_action :set_photo, only: [:show, :photo_get, :photo_get, :photo_get_rev]
 
   # GET /photos
   # GET /photos.json
@@ -29,6 +31,16 @@ class PhotosController < ApplicationController
     send_file SanbeeBlogPhoto::Application.config.img_path_root + @photo.path, :disposition => "inline"
   end
 
+  # GET /photo/:id/photo_get_rev
+  # GET /photo/:id/photo_get_rev.json
+  def photo_get_rev
+    path = SanbeeBlogPhoto::Application.config.img_path_root + @photo.path
+    img = MiniMagick::Image.open(path)
+    flop_img = img.flop
+    
+    send_data flop_img.to_blob, :disposition => "inline"
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo

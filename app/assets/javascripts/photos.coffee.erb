@@ -3,6 +3,16 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
+  $("#photo").click ->
+    flop_photo()
+  
+  flop_photo = ->
+    pathElm = $("#photo").attr("src").split("/")
+    if pathElm[3] == "photo_get"
+      $("#photo").attr("src", "/" + pathElm[1] + "/" + pathElm[2] + "/" + "photo_get_rev")
+    else
+      $("#photo").attr("src", "/" + pathElm[1] + "/" + pathElm[2] + "/" + "photo_get")
+  
   $(".back-button").click ->
     history.back()
 

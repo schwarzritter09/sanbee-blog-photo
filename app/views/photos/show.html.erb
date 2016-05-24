@@ -5,7 +5,7 @@
 
 <dl class="dl-horizontal">
   <dt></dt>
-  <dd><%= image_tag photo_get_photo_path(@photo), :class => 'img-responsive' %></dd>
+  <dd><%= image_tag photo_get_photo_path(@photo), :class => 'img-responsive', :id => 'photo'%></dd>
   <dt><strong>ブログへリンク</strong></dt>
   <dd>
   	<% if @photo.article.present? %>
