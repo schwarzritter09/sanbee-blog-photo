@@ -1,7 +1,10 @@
 <%- model_class = Photo -%>
 <dl class="dl-horizontal">
   <dt></dt>
-  <dd><%= image_tag photo_get_photo_path(@photo), :class => 'img-responsive', :id => 'photo'%></dd>
+  <dd>
+  	<%= image_tag photo_get_photo_path(@photo), :class => 'img-responsive', :id => 'photo'%>
+  	(画像タップで左右反転)
+  </dd>
   <dt><strong>ブログへリンク</strong></dt>
   <dd>
   	<% if @photo.article.present? %>
