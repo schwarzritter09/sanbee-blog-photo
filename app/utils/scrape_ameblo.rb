@@ -101,7 +101,7 @@ class ScrapeAmeblo
         end
         
         # 未完検知のため、titleなどの設定は画像ダウンロードが終わったあとに行う
-        m = Member.where(name: theme.gsub(" ", ""))
+        m = Member.find_by_name(theme.gsub(" ", ""))
         savedArticle.title = title
         savedArticle.theme = theme
         savedArticle.member_id = m.id if m.present?
