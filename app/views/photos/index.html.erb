@@ -1,4 +1,6 @@
 <%- model_class = Photo -%>
+<br />
+<br />
 <%= form_tag photos_path, :method=>"get", :id=>"search-form" do %>
 <div class="panel-group" id="search">
   <div class="panel panel-default">
@@ -16,7 +18,7 @@
   	  </div>
   </div>
 </div>
-  	<% end %>
+<% end %>
 <%= paginate(@photos) %>
 <div id="photos" class="container-fluid">
   <div class="row">
