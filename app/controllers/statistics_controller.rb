@@ -21,7 +21,7 @@ class StatisticsController < ApplicationController
       soloEntryCount[m.id] = 0 if soloEntryCount[m.id].nil?
 
       # 自身の上げたブログでの統計
-      entryCountByOwner = Article.find_by_member_id(m.id).photos.count if Article.find_by_member_id(m.id).present?
+      entryCountByOwner = Article.where(member_id: m.id).photos.count if Article.where(member_id: m.id).present?
       solo_photo_by_owner_ids = Tag.where(member_id: m.id).joins(:article).select(:photo_id).where("articles.member_id = ?", m.id).group(:photo_id).having("count(photo_id) = 1"
 ).pluck(:photo_id)
       soloEntryCountByOwner = Tag.where(member_id: m.id).where(photo_id: solo_photo_by_owner_ids).order("count_member_id desc").group(:member_id).count(:member_id)
