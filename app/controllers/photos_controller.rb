@@ -38,7 +38,7 @@ class PhotosController < ApplicationController
     img = MiniMagick::Image.open(path)
     flop_img = img.flop
     
-    send_data flop_img.to_blob, :disposition => "inline"
+    send_data flop_img.to_blob, :disposition => "inline", :filename => @photo.path, :type => "image/jpeg"
   end
   
   private
