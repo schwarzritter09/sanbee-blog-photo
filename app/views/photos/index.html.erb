@@ -1,7 +1,4 @@
 <%- model_class = Photo -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
 <%= form_tag photos_path, :method=>"get", :id=>"search-form" do %>
 <div class="panel-group" id="search">
   <div class="panel panel-default">
