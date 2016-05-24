@@ -23,9 +23,9 @@ class StatisticsController < ApplicationController
       
       # 自身の上げたブログでの統計
       ## 自身が上げた画像のカウント
-      entryByOwner = Photo.joins(:tags, :article).where("tags.member_id = ?", m.id).where("articles.member_id = ?", m.id).uniq(:id)
+      entryByOwner = Photo.joins(:tags, :article).where("articles.member_id = ?", m.id).uniq(:id)
       ## 自身が上げた画像の中で、他人が写っている画像のカウント
-      otherEntryByOwner = Photo.joins(:tags, :article).where.not("tags.member_id = ?", m.id).where("articles.member_id = ?", m.id).uniq(:id)
+      otherEntryByOwner = Photo.joins(:tags, :article).where("articles.member_id = ?", m.id).where.not("tags.member_id = ?", m.id).uniq(:id)
       ## 自身のみ写っている画像のカウント(自身が上げた画像のカウントから、他人が写っているカウントを除外)
       soloEntryByOwnerCount = entryByOwner.count - otherEntryByOwner.count
       
