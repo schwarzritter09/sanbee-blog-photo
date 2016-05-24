@@ -16,7 +16,7 @@
   </dd>
   <dt><strong>投稿者</strong></dt>
   <dd>
-  	<% if @photo.article.present? %>
+  	<% if @photo.article.present? && @photo.article.member.present? %>
   	  <%= @photo.article.member.name %>
   	<% end %>
   </dd>
