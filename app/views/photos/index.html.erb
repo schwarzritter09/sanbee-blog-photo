@@ -24,7 +24,7 @@
   	    </div>
   	    <div class="panel-body collapse" id="areaComplex">
   	      <div>
-  	      	<% if params[:photo_search][:and].present? %>
+  	      	<% if params[:photo_search].present? && params[:photo_search][:and].present? %>
   	          <input type="checkbox" name="photo_search[and]" checked data-on="AND検索" data-off="OR検索" data-toggle="toggle" data-size="large" data-width="130">
   	        <% else %>
   	          <input type="checkbox" name="photo_search[and]" data-on="AND検索" data-off="OR検索" data-toggle="toggle" data-size="large" data-width="130">
@@ -34,7 +34,7 @@
           </div>
           <br />
           <div>
-          	<% if params[:photo_search][:only].present? %>
+          	<% if params[:photo_search].present? && params[:photo_search][:only].present? %>
   	          <input type="checkbox" checked name="photo_search[only]" data-on="ONLY検索" data-off="IN検索" data-toggle="toggle" data-size="large" data-width="130">
   	        <% else %>
   	          <input type="checkbox" name="photo_search[only]" data-on="ONLY検索" data-off="IN検索" data-toggle="toggle" data-size="large" data-width="130">
