@@ -11,11 +11,41 @@
   	  	</a>
   	  </h3>
   	</div>
-  	  <div class="panel-body collapse" id="members">
-  	    <%= button_tag "検索する", :type=>"button", :class=>"btn btn-lg btn-default search-button" %>
-  	    <%= search_panel %>
-  	    <%= button_tag "検索する", :type=>"button", :class=>"btn btn-lg btn-default search-button" %>
-  	  </div>
+  	<div class="panel-body collapse" id="members">
+  	  <%= button_tag "検索する", :type=>"button", :class=>"btn btn-lg btn-default search-button" %>
+  	  <%= search_panel %>
+  	  <div class="panel-group" id="#complex">
+  	    <div class="panel panel-default">
+  	  	  <div class="panel-heading">
+  	  	    <h4 class="panel-title">
+  	  	  	  <a data-toggle="collapse", data-parent="#complex", href="#areaComplex">複雑な検索条件</a>
+  	  	    </h4>
+  	  	  </div>	
+  	    </div>
+  	    <div class="panel-body collapse" id="areaComplex">
+  	      <div>
+  	      	<% if params[:photo_search][:and].present? %>
+  	          <input type="checkbox" name="photo_search[and]" checked data-on="AND検索" data-off="OR検索" data-toggle="toggle" data-size="large" data-width="130">
+  	        <% else %>
+  	          <input type="checkbox" name="photo_search[and]" data-on="AND検索" data-off="OR検索" data-toggle="toggle" data-size="large" data-width="130">
+  	        <% end %>
+  	        AND検索: AとBが載っている画像
+  	        OR検索: AかBが載っている画像
+          </div>
+          <br />
+          <div>
+          	<% if params[:photo_search][:only].present? %>
+  	          <input type="checkbox" checked name="photo_search[only]" data-on="ONLY検索" data-off="IN検索" data-toggle="toggle" data-size="large" data-width="130">
+  	        <% else %>
+  	          <input type="checkbox" name="photo_search[only]" data-on="ONLY検索" data-off="IN検索" data-toggle="toggle" data-size="large" data-width="130">
+  	        <% end %>
+  	        ONLY検索: AとBだけが載っている画像
+  	        IN検索: AとBと他の誰かが載っていても良い画像
+          </div>
+  	    </div>
+  	  </div> 
+      <%= button_tag "検索する", :type=>"button", :class=>"btn btn-lg btn-default search-button" %>
+    </div>
   </div>
 </div>
 <% end %>
