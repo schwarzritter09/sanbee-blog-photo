@@ -18,7 +18,31 @@ class Photo < ActiveRecord::Base
         photos = Photo.where.not(id: not_target_ids)
         photo_search[:member_id] = nil
       else
-        photos = photos.has_tag_member_id(photo_search[:member_id]) if photo_search[:member_id].present?
+        if photo_search[:only].present? && photo_search[:member_id].size == 1
+          
+          # 一旦member_idが一致するphoto_idを検索
+          target_photo_ids = Tag.select(:photo_id).
+                             where("count > 0").
+                             where(photo_id: Tag.where("count > 0").where(member_id: photo_search[:member_id]).pluck(:photo_id)).
+                             group(:photo_id).
+                             having("count(photo_id) = 1")
+          
+          photos = photos.where(id: target_photo_ids.uniq.pluck(:photo_id))
+          
+        elsif photo_search[:and].present? || photo_search[:only].present?
+          
+          target_photo_ids = Tag.select(:photo_id).where("count > ?", 0).where(member_id: photo_search[:member_id]).group(:photo_id)
+             
+          if photo_search[:only].present?
+            target_photo_ids = target_photo_ids.having("count(photo_id) = ?", photo_search[:member_id].size)
+          else
+            target_photo_ids = target_photo_ids.having("count(photo_id) >= ?", photo_search[:member_id].size)
+          end
+          
+          photos = photos.where(id: target_photo_ids.uniq.pluck(:photo_id))
+        else
+          photos = photos.has_tag_member_id(photo_search[:member_id]) if photo_search[:member_id].present?
+        end
       end
     end
 
