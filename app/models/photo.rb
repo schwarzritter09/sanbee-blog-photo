@@ -46,7 +46,7 @@ class Photo < ActiveRecord::Base
             
             # 指定メンバーのタグを持つPhotoを抽出
             photo_search[:member_id].each do |mid|
-              photos = photos.where(id: Tag.where(member_id: mid).pluck(:photo_id))
+              photos = photos.where(id: Tag.where(member_id: mid).where("count > 0").pluck(:photo_id))
             end
           else
             # 複数メンバーのAND, IN検索
@@ -62,7 +62,7 @@ class Photo < ActiveRecord::Base
             
             # 指定メンバーのタグを持つPhotoを抽出
             photo_search[:member_id].each do |mid|
-              photos = photos.where(id: Tag.where(member_id: mid).pluck(:photo_id))
+              photos = photos.where(id: Tag.where(member_id: mid).where("count > 0").pluck(:photo_id))
             end
           end
         else
