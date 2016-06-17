@@ -23,7 +23,7 @@ class ScrapeAmeblo
         imagepageSession.driver.quit
           
         # 画像リンクを取得
-        imageTag = imagepage.css('#imgEncircle img')
+        imageTag = imagepage.css(SanbeeBlogPhoto::Application.config.image_css)
                         
         imageUrl = imageTag.attribute('src').value
         p imageUrl
@@ -75,15 +75,15 @@ class ScrapeAmeblo
         articleSession.driver.quit
         
         # 投稿日付を取得
-        publishDate = article.css(".skin-entryPubdate time").first.content
+        publishDate = article.css(SanbeeBlogPhoto::Application.config.date_css).first.content
         p publishDate
             
         # テーマ(投稿メンバー)を取得
-        theme = article.css(".skin-entryThemes dd a").first.content
+        theme = article.css(SanbeeBlogPhoto::Application.config.theme_css).first.content
         p theme
         
         # タイトルを取得
-        title = article.css(".skin-entryTitle a").first.content
+        title = article.css(SanbeeBlogPhoto::Application.config.title_css).first.content
         p title
        
         # 記事をDBに登録
@@ -92,7 +92,7 @@ class ScrapeAmeblo
         end
             
         # 画像ページリンク一覧を取得
-        imagepageLinks = article.css('a.detailOn')
+        imagepageLinks = article.css(SanbeeBlogPhoto::Application.config.image_link_css)
         imagepageLinks.each do |imagepageLink|
           imagepageUrl = imagepageLink.attribute('href').value
           p imagepageUrl
@@ -133,7 +133,7 @@ class ScrapeAmeblo
       entrylistSession.driver.quit
             
       # 記事のリンク一覧を取得
-      articleLinks = entrylist.css('#main h2 a')
+      articleLinks = entrylist.css(SanbeeBlogPhoto::Application.config.article_link_css)
       
       articleLinks.each do |articleLink|
         articleUrl = articleLink.attribute('href').value

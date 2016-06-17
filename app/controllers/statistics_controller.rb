@@ -9,7 +9,7 @@ class StatisticsController < ApplicationController
     @tagedCount = taged_ids.count
     @notTagedCount = nottaged_ids.count
             
-    @members = Member.where.not(id: [27,28])
+    @members = Member.where.not(unit_id: 7)
     @ranks = Hash.new
     @members.each do |m|
       

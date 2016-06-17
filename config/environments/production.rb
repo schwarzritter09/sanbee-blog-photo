@@ -77,5 +77,19 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
+  config.ap_title = "3Bjrブログ画像まとめ"
+  
   config.img_path_root = "/var/img/"
+  
+  config.article_link_css = "#main h2 a"
+  config.date_css = ".skin-entryPubdate time"
+  config.title_css = ".skin-entryTitle a"
+  config.theme_css = ".skin-entryThemes dd a"
+  config.image_link_css = "a.detailOn"
+  config.image_css = "#imgEncircle img"
+  
+  config.entrylist_url = "http://ameblo.jp/3bjr/entrylist.html"
+  
+  config.entrylist_number_url_prefix = "http://ameblo.jp/3bjr/entrylist-"
+  config.entrylist_number_url_suffix = ".html"
 end

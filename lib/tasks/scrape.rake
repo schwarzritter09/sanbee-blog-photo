@@ -2,7 +2,7 @@ namespace :scrape do
   desc "Scraping Ameblo"
   
   task :entrylist => :environment do
-    url = "http://ameblo.jp/3bjr/entrylist.html"
+    url = SanbeeBlogPhoto::Application.config.entrylist_url
     save_dir = SanbeeBlogPhoto::Application.config.img_path_root
     force_mode = false
     
@@ -11,7 +11,7 @@ namespace :scrape do
   end
   
   task :otherentry, ['number'] => :environment do |task, args|
-    url = "http://ameblo.jp/3bjr/entrylist-#{args[:number]}.html"
+    url = SanbeeBlogPhoto::Application.config.entrylist_number_url_prefix + args[:number] + SanbeeBlogPhoto::Application.config.entrylist_number_url_suffix
     save_dir = SanbeeBlogPhoto::Application.config.img_path_root
     force_mode = false
     
