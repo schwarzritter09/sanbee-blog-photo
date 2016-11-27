@@ -7,7 +7,7 @@ namespace :scrape do
     force_mode = false
     
     s = ScrapeAmeblo.new
-    s.scrape(url, save_dir, force_mode)
+    s.scrape(url, save_dir, force_mode, true)
   end
   
   task :otherentry, ['number'] => :environment do |task, args|
@@ -16,7 +16,7 @@ namespace :scrape do
     force_mode = false
     
     s = ScrapeAmeblo.new
-    s.scrape(url, save_dir, force_mode)
+    s.scrape(url, save_dir, force_mode, true)
   end
   
   task :other, ['url'] => :environment do |task, args|
@@ -25,7 +25,7 @@ namespace :scrape do
     force_mode = false
     
     s = ScrapeAmeblo.new
-    s.scrape(url, save_dir, force_mode)
+    s.scrape(url, save_dir, force_mode, true)
   end
   
   task :article => :environment do
@@ -38,7 +38,7 @@ namespace :scrape do
       begin
         p "do get [#{a.url}]"
         sa = ScrapeAmeblo.new
-        sa.scrapeArticle(a.url, save_dir, true)
+        sa.scrapeArticle(a.url, save_dir, true, true)
       rescue => e
         
         p "<<ameblo scrape [#{a.url}] ERROR : #{e.message}>>"

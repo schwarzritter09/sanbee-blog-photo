@@ -70,3 +70,6 @@ gem 'whenever'
 
 # Use flop image
 gem 'mini_magick'
+
+# Use Tweet
+gem 'twitter'

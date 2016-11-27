@@ -55,7 +55,7 @@ class ScrapeAmeblo
   end
   
 
-  def scrapeArticle(articleUrl, downloadPath, isForce)
+  def scrapeArticle(articleUrl, downloadPath, isForce, isTweet)
     
     begin
       p "do get scrapeArticle [#{articleUrl}]"
@@ -107,6 +107,11 @@ class ScrapeAmeblo
         savedArticle.member_id = m.id if m.present?
         savedArticle.created_at = publishDate
         savedArticle.save
+        
+        if isTweet
+          twitterClient = TwitterClient.new
+          twitterClient.tweet(savedArticle)
+        end
       end
       
     rescue => e
@@ -115,7 +120,7 @@ class ScrapeAmeblo
     end
   end
 
-  def scrape(url, downloadPath, isForce)
+  def scrape(url, downloadPath, isForce, isTweet)
     begin
       Capybara.register_driver :poltergeist do |app|
         Capybara::Poltergeist::Driver.new(app, {:js_errors => false, :time_out => 1000})
@@ -138,7 +143,7 @@ class ScrapeAmeblo
       articleLinks.each do |articleLink|
         articleUrl = articleLink.attribute('href').value
         p articleUrl
-        scrapeArticle(articleUrl, downloadPath, isForce)
+        scrapeArticle(articleUrl, downloadPath, isForce, isTweet)
       end
     
     rescue => e
