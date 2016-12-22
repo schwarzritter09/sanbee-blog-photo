@@ -93,6 +93,13 @@ Rails.application.configure do
   config.entrylist_number_url_prefix = "http://ameblo.jp/3bjr/entrylist-"
   config.entrylist_number_url_suffix = ".html"
   
+  config.lineblog_ua = "Mozilla/5.0 (Linux; Android 6.0.1; SOV34 Build/39.0.C.0.282) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36"
+  config.lineblog_article_link_css = ".article-list a"
+  config.lineblog_date_css = "p.article-date time"
+  config.lineblog_title_css = "h2.article-title a"
+  config.lineblog_image_link_css = "div.article-body-inner div a"
+  config.lineblog_image_css = "img"
+  
   config.tweet_host = "ik1-341-30671.vs.sakura.ne.jp:81"
   config.tweet_consumer_key = "92JghxfQrZwXHHZXBIkalR9jf"
   config.tweet_consumer_secret = "fbjNCNmKv6ETAkMQG4BXkcr1i5JnQcUkuDgVYFauLliXqz889g"
