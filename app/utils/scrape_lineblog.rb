@@ -28,8 +28,8 @@ class ScrapeLineblog
         imagepageSession.driver.quit
           
         # 画像リンクを取得
-        imageTag = imagepage.css(SanbeeBlogPhoto::Application.config.image_css)
-                        
+        imageTag = imagepage.css(SanbeeBlogPhoto::Application.config.lineblog_image_css)
+        p imageTag
         imageUrl = imageTag.attribute('src').value
         p imageUrl
             
@@ -63,12 +63,6 @@ class ScrapeLineblog
   def scrapeArticle(articleUrl, downloadPath, isForce, isTweet)
     
     begin
-      Capybara.register_driver :poltergeist do |app|
-        Capybara::Poltergeist::Driver.new(app, {:js_errors => false, :time_out => 5000})
-      end
-      Capybara.default_selector = :css
-      Capybara.default_wait_time = 10
-      
       p "do get scrapeArticle [#{articleUrl}]"
       
       # 該当記事が取得済みの場合スキップ
@@ -79,7 +73,7 @@ class ScrapeLineblog
         articleSession = Capybara::Session.new(:poltergeist)
         articleSession.driver.headers = { 'User-Agent' =>  SanbeeBlogPhoto::Application.config.lineblog_ua} 
         articleSession.visit articleUrl
-      
+            
         article = Nokogiri::HTML.parse(articleSession.html)
       
         # セッションを終了
@@ -94,13 +88,14 @@ class ScrapeLineblog
         # p theme
         
         # タイトルを取得
-        title = article.css(SanbeeBlogPhoto::Application.config.title_css).first.content
+        p
+        title = article.css(SanbeeBlogPhoto::Application.config.lineblog_title_css).first.content.strip
         p title
        
         # 記事をDBに登録
-        #if savedArticle.nil?
-        #  savedArticle = Article.create :url=>articleUrl, :created_at=>publishDate
-        #end
+        if savedArticle.nil?
+          savedArticle = Article.create :url=>articleUrl, :created_at=>publishDate
+        end
             
         # 画像ページリンク一覧を取得
         imagepageLinks = article.css(SanbeeBlogPhoto::Application.config.lineblog_image_link_css)
@@ -108,14 +103,11 @@ class ScrapeLineblog
           imagepageUrl = imagepageLink.attribute('href').value
           p imagepageUrl
           
-          #scrapeImage(savedArticle.id, publishDate, imagepageUrl, downloadPath, isForce)
+          scrapeImage(savedArticle.id, publishDate, imagepageUrl, downloadPath, isForce)
         end
         
         # 未完検知のため、titleなどの設定は画像ダウンロードが終わったあとに行う
-        m = Member.find_by_name(theme.gsub(" ", ""))
         savedArticle.title = title
-        savedArticle.theme = theme
-        savedArticle.member_id = m.id if m.present?
         savedArticle.created_at = publishDate
         savedArticle.save
         

@@ -55,6 +55,13 @@ Rails.application.configure do
   config.entrylist_number_url_prefix = "http://ameblo.jp/3bjr/entrylist-"
   config.entrylist_number_url_suffix = ".html"
   
+  config.lineblog_ua = "Mozilla/5.0 (Linux; Android 6.0.1; SOV34 Build/39.0.C.0.282) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36"
+  config.lineblog_article_link_css = ".article-list a"
+  config.lineblog_date_css = "li.article-datetime time"
+  config.lineblog_title_css = ".article-title"
+  config.lineblog_image_link_css = "div.article-body div a"
+  config.lineblog_image_css = "img"
+  
   config.tweet_host = "localhost"
   config.tweet_consumer_key = "zYrvDAVNm0QRfdGkOVXOh55MX"
   config.tweet_consumer_secret = "Efttcdt6pdLeIw1X6hnbX5LrgVRDbc4y0SodePYeBE01DmLjw2"
