@@ -29,12 +29,11 @@ class ScrapeLineblog
           
         # 画像リンクを取得
         imageTag = imagepage.css(SanbeeBlogPhoto::Application.config.lineblog_image_css)
-        p imageTag
         imageUrl = imageTag.attribute('src').value
         p imageUrl
             
         fileName = File.basename(imageUrl)
-        filePath = downloadPath + "/" + fileName
+        filePath = downloadPath + "/" + fileName + ".jpg"
         
         open(filePath, 'wb') do |output|
           open(imageUrl) do |data|
