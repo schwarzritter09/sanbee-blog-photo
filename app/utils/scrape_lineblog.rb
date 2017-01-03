@@ -43,7 +43,7 @@ class ScrapeLineblog
             
         # 画像をDBへ登録
         if savedImage.nil?
-          savedImage = Photo.create :path=>fileName, :create_member_id=>1, :url=>imagepageUrl, :created_at=>publishDate, :article_id=>articleId
+          savedImage = Photo.create :path=>fileName + ".jpg", :create_member_id=>1, :url=>imagepageUrl, :created_at=>publishDate, :article_id=>articleId
         else
           # 登録済みの場合には、作成日付を更新する
           savedImage.created_at = publishDate
