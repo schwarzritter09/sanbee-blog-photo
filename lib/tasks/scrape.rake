@@ -8,6 +8,10 @@ namespace :scrape do
     
     s = ScrapeAmeblo.new
     s.scrape(url, save_dir, force_mode, true)
+    
+    lineblog = SanbeeBlogPhoto::Application.config.lineblog_entrylist_url
+    sl = ScrapeLineblog.new
+    sl.scrape(lineblog, save_dir, force_mode, true)
   end
   
   task :otherentry, ['number'] => :environment do |task, args|

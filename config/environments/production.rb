@@ -100,6 +100,8 @@ Rails.application.configure do
   config.lineblog_image_link_css = "div.article-body div a"
   config.lineblog_image_css = "img"
   
+  config.lineblog_entrylist_url = "http://lineblog.me/rockajaponica"
+  
   config.tweet_host = "ik1-341-30671.vs.sakura.ne.jp:81"
   config.tweet_consumer_key = "92JghxfQrZwXHHZXBIkalR9jf"
   config.tweet_consumer_secret = "fbjNCNmKv6ETAkMQG4BXkcr1i5JnQcUkuDgVYFauLliXqz889g"
