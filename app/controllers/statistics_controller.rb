@@ -50,9 +50,11 @@ class StatisticsController < ApplicationController
                       
       @counts[m.id] = Hash.new
       @members.each do |m2|
-        photo_search = Hash.new
-        photo_search[:member_id] = [m.id, m2.id]
-        @counts[m.id][m2.id] = Photo.and_only(photo_search).count
+        if(m.id < m2.id)
+          photo_search = Hash.new
+          photo_search[:member_id] = [m.id, m2.id]
+          @counts[m.id][m2.id] = Photo.and_only(photo_search).count
+        end
       end 
     end
   end
