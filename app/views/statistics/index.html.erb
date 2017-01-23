@@ -61,3 +61,34 @@ $('table#statistics').dataTable({
     "bAutoWidth": false	
 });
 </script>
+
+<br>
+<h1>2ショット枚数</h1>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+  	<thead>
+  	  <tr>
+  	  	<th></th>
+  	  	<% @members.each do |m| %>
+  	  	  <th class="tategaki"><%=m.name %></th>
+  	  	<% end %>
+  	  </tr>
+    </thead>
+    <tbody>
+      <% @members.each do |m| %>
+        <tr>
+          <td><%= m.name %></td>
+          <% @members.each do |m2| %>
+            <td>
+              <% if m.id == m2.id %>
+                
+              <% else %>
+            	<%= @counts[m.id][m2.id] %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
