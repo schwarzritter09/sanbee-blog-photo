@@ -79,13 +79,15 @@ $('table#statistics').dataTable({
         <tr>
           <td><%= m.name %></td>
           <% @members.each do |m2| %>
-            <td>
-              <% if m.id == m2.id %>
-                
-              <% else %>
-            	<%= @counts[m.id][m2.id] %>
-              <% end %>
-            </td>
+            <% if m.id == m2.id %>
+              <td></td>
+            <% elsif @counts[m.id][m2.id] == 0  %>
+              <td class="zero">0</td>
+            <% else %>
+              <td>
+                <%= @counts[m.id][m2.id] %>
+              </td>
+            <% end %>
           <% end %>
         </tr>
       <% end %>
