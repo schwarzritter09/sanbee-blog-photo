@@ -81,16 +81,17 @@ class ScrapeLineblog
         # 投稿日付を取得
         publishDate = article.css(SanbeeBlogPhoto::Application.config.lineblog_date_css).first.content
         p publishDate
-            
-        # テーマ(投稿メンバー)を取得 -> LineBLOGはテーマが無い
-        # theme = article.css(SanbeeBlogPhoto::Application.config.lineblog_theme_css).first.content
-        # p theme
         
         # タイトルを取得
         p
         title = article.css(SanbeeBlogPhoto::Application.config.lineblog_title_css).first.content.strip
         p title
-       
+            
+        # テーマ(投稿メンバー)を取得 -> LineBLOGはタイトルの【】内が投稿メンバー名
+        name = title.match("【(.+)】")
+        theme = name[1] if name.present?
+        p theme
+        
         # 記事をDBに登録
         if savedArticle.nil?
           savedArticle = Article.create :url=>articleUrl, :created_at=>publishDate
@@ -106,7 +107,10 @@ class ScrapeLineblog
         end
         
         # 未完検知のため、titleなどの設定は画像ダウンロードが終わったあとに行う
+        m = Member.find_by_name(theme)
         savedArticle.title = title
+        savedArticle.theme = theme
+        savedArticle.member_id = m.id if m.present?
         savedArticle.created_at = publishDate
         savedArticle.save
         
