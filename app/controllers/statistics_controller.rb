@@ -47,15 +47,7 @@ class StatisticsController < ApplicationController
       
       @ranks[m.id] = {:count=>entry.count, :soloCount=>soloEntryCount, :ratio=>ratio,
                       :countByOwner=>entryByOwner.count, :soloCountByOwner=>soloEntryByOwnerCount, :ratioByOwner=>ratioByOwner}
-                      
-      @counts[m.id] = Hash.new
-      @members.each do |m2|
-        if(m.id < m2.id)
-          photo_search = Hash.new
-          photo_search[:member_id] = [m.id, m2.id]
-          @counts[m.id][m2.id] = Photo.and_only(photo_search).count
-        end
-      end 
+
     end
   end
 end

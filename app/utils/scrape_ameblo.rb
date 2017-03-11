@@ -26,6 +26,9 @@ class ScrapeAmeblo
         imageTag = imagepage.css(SanbeeBlogPhoto::Application.config.image_css)
                         
         imageUrl = imageTag.attribute('src').value
+        if imageUrl.start_with?("//")
+          imageUrl = "http:" + imageUrl
+        end
         p imageUrl
             
         fileName = File.basename(imageUrl)
@@ -79,7 +82,7 @@ class ScrapeAmeblo
         p publishDate
             
         # テーマ(投稿メンバー)を取得
-        theme = article.css(SanbeeBlogPhoto::Application.config.theme_css).first.content
+        theme = article.css(SanbeeBlogPhoto::Application.config.theme_css).first.content.gsub(" ", "").gsub("　","")
         p theme
         
         # タイトルを取得
@@ -101,7 +104,7 @@ class ScrapeAmeblo
         end
         
         # 未完検知のため、titleなどの設定は画像ダウンロードが終わったあとに行う
-        m = Member.find_by_name(theme.gsub(" ", ""))
+        m = Member.find_by_name(theme)
         savedArticle.title = title
         savedArticle.theme = theme
         savedArticle.member_id = m.id if m.present?
