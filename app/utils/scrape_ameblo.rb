@@ -98,6 +98,9 @@ class ScrapeAmeblo
         imagepageLinks = article.css(SanbeeBlogPhoto::Application.config.image_link_css)
         imagepageLinks.each do |imagepageLink|
           imagepageUrl = imagepageLink.attribute('href').value
+          if imagepageUrl.start_with?("//")
+            imagepageUrl = "http:" + imagepageUrl
+          end
           p imagepageUrl
           
           scrapeImage(savedArticle.id, publishDate, imagepageUrl, downloadPath, isForce)
