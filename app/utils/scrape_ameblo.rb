@@ -148,6 +148,9 @@ class ScrapeAmeblo
       
       articleLinks.each do |articleLink|
         articleUrl = articleLink.attribute('href').value
+        if articleUrl.start_with?("//")
+          articleUrl = "http:" + articleUrl
+        end
         p articleUrl
         scrapeArticle(articleUrl, downloadPath, isForce, isTweet)
       end
