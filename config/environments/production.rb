@@ -88,10 +88,13 @@ Rails.application.configure do
   config.image_link_css = "a.detailOn"
   config.image_css = "#imgEncircle img"
   
-  config.entrylist_url = "http://ameblo.jp/3bjr/entrylist.html"
+  config.entrylist_1_url = "http://ameblo.jp/3bjr/entrylist.html"  
+  config.entrylist_1_number_url_prefix = "http://ameblo.jp/3bjr/entrylist-"
+  config.entrylist_1_number_url_suffix = ".html"
   
-  config.entrylist_number_url_prefix = "http://ameblo.jp/3bjr/entrylist-"
-  config.entrylist_number_url_suffix = ".html"
+  config.entrylist_2_url = "http://ameblo.jp/hachimitsu-rocket/entrylist.html"  
+  config.entrylist_2_number_url_prefix = "http://ameblo.jp/hachimitsu-rocket/entrylist-"
+  config.entrylist_2_number_url_suffix = ".html"
   
   config.lineblog_ua = "Mozilla/5.0 (Linux; Android 6.0.1; SOV34 Build/39.0.C.0.282) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36"
   config.lineblog_article_link_css = ".article-list a"

@@ -2,12 +2,17 @@ namespace :scrape do
   desc "Scraping Ameblo"
   
   task :entrylist => :environment do
-    url = SanbeeBlogPhoto::Application.config.entrylist_url
+    url = SanbeeBlogPhoto::Application.config.entrylist_1_url
     save_dir = SanbeeBlogPhoto::Application.config.img_path_root
     force_mode = false
     
     s = ScrapeAmeblo.new
     s.scrape(url, save_dir, force_mode, true)
+    
+    url_hachi = SanbeeBlogPhoto::Application.config.entrylist_1_url
+    
+    s_hachi = ScrapeAmeblo.new
+    s_hachi.scrape(url_hachi, save_dir, force_mode, true)
     
     lineblog = SanbeeBlogPhoto::Application.config.lineblog_entrylist_url
     sl = ScrapeLineblog.new
@@ -16,6 +21,15 @@ namespace :scrape do
   
   task :otherentry, ['number'] => :environment do |task, args|
     url = SanbeeBlogPhoto::Application.config.entrylist_number_url_prefix + args[:number] + SanbeeBlogPhoto::Application.config.entrylist_number_url_suffix
+    save_dir = SanbeeBlogPhoto::Application.config.img_path_root
+    force_mode = false
+    
+    s = ScrapeAmeblo.new
+    s.scrape(url, save_dir, force_mode, true)
+  end
+  
+  task :otherentry_hachi, ['number'] => :environment do |task, args|
+    url = SanbeeBlogPhoto::Application.config.entrylist_2_number_url_prefix + args[:number] + SanbeeBlogPhoto::Application.config.entrylist_2_number_url_suffix
     save_dir = SanbeeBlogPhoto::Application.config.img_path_root
     force_mode = false
     
