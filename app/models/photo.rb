@@ -30,14 +30,15 @@ class Photo < ActiveRecord::Base
                            having("count(photo_id) = ?", photo_search[:member_id].size)
         
     # 一旦抽出
-    photos = Photo.where(id: target_photo_ids.uniq.pluck(:photo_id))
+    photo_ids = Photo.where(id: target_photo_ids.uniq.pluck(:photo_id)).pluck(:id)
+
           
     # 指定メンバーのタグを持つPhotoを抽出
     photo_search[:member_id].each do |mid|
-      photos = photos.where(id: Tag.where(member_id: mid).where("count > 0").pluck(:photo_id))
+      photo_ids = photo_ids & Tag.where(member_id: mid).where("count > 0").pluck(:photo_id)
     end
     
-    photos
+    Photo.where(id: photo_ids)
   end
   
   def self.and_in(photo_search)
