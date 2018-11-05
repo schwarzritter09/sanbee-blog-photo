@@ -23,6 +23,10 @@ namespace :scrape do
     lineblog_hachi = SanbeeBlogPhoto::Application.config.lineblog_entrylist_2_url
     sl_hachi = ScrapeLineblog.new
     sl_hachi.scrape(lineblog_hachi, save_dir, force_mode, true)
+
+    lineblog_ame = SanbeeBlogPhoto::Application.config.lineblog_entrylist_3_url
+    sl_ame = ScrapeLineblog.new
+    sl_ame.scrape(lineblog_ame, save_dir, force_mode, true)
   end
   
   task :otherentry, ['number'] => :environment do |task, args|

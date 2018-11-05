@@ -107,6 +107,7 @@ Rails.application.configure do
   
   config.lineblog_entrylist_1_url = "http://lineblog.me/rockajaponica"
   config.lineblog_entrylist_2_url = "http://lineblog.me/hachimitsurocket"
+  config.lineblog_entrylist_3_url = "http://lineblog.me/amefurashi"
   
   config.tweet_host = "ik1-341-30671.vs.sakura.ne.jp:81"
   config.tweet_consumer_key = "92JghxfQrZwXHHZXBIkalR9jf"
