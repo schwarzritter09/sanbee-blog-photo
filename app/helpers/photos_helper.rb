@@ -13,10 +13,8 @@ module PhotosHelper
     unitMap = {}
     unitMap[1] = "ロッカジャポニカ"
     unitMap[2] = "はちみつロケット"
-    unitMap[3] = "奥澤村"
-    unitMap[4] = "リーフシトロン"
-    unitMap[5] = "マジェスティックセブン"
-    unitMap[6] = "ひとつのカテゴリー"
+    unitMap[3] = "アメフラっシ"
+    unitMap[4] = "3Bjr"
     unitMap[7] = "その他"
 
     content_tag :div, :class=>"panel-group", :id=>"unit" do
@@ -74,10 +72,8 @@ module PhotosHelper
     unitMap = {}
     unitMap[1] = "ロッカジャポニカ"
     unitMap[2] = "はちみつロケット"
-    unitMap[3] = "奥澤村"
-    unitMap[4] = "リーフシトロン"
-    unitMap[5] = "マジェスティックセブン"
-    unitMap[6] = "ひとつのカテゴリー"
+    unitMap[3] = "アメフラっシ"
+    unitMap[4] = "3Bjr"
     unitMap[7] = "その他"
 
     content_tag :div, :class=>"panel-group", :id=>"tag" do
