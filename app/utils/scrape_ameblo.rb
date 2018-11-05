@@ -126,7 +126,7 @@ class ScrapeAmeblo
     end
   end
 
-  def scrape(url, downloadPath, isForce, isTweet)
+  def scrape(host, url, downloadPath, isForce, isTweet)
     begin
       Capybara.register_driver :poltergeist do |app|
         Capybara::Poltergeist::Driver.new(app, {:js_errors => false, :time_out => 1000})
@@ -150,6 +150,9 @@ class ScrapeAmeblo
         articleUrl = articleLink.attribute('href').value
         if articleUrl.start_with?("//")
           articleUrl = "http:" + articleUrl
+        end
+        if articleUrl.start_with?("/")
+          articleUrl = host + articleUrl
         end
         p articleUrl
         scrapeArticle(articleUrl, downloadPath, isForce, isTweet)

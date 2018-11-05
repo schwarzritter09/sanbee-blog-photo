@@ -122,12 +122,12 @@ class Photo < ActiveRecord::Base
   end
   
   def previous_notag
-    not_target_ids = Photo.joins(:tags).uniq.pluck(:id)
-    Photo.order('created_at DESC').order('id DESC').where.not(id: not_target_ids).where('id < ?', id).first
+    not_target_ids = Photo.includes(:tags).where(tags: {id: nil}).uniq.pluck(:id)
+    Photo.order('created_at DESC').order('id DESC').where(id: not_target_ids).where('id < ?', id).first
   end
 
   def next_notag
-    not_target_ids = Photo.joins(:tags).uniq.pluck(:id)
-    Photo.order('created_at DESC').order('id DESC').where.not(id: not_target_ids).where('id > ?', id).reverse.first
+    not_target_ids = Photo.includes(:tags).where(tags: {id: nil}).uniq.pluck(:id)
+    Photo.order('created_at DESC').order('id DESC').where(id: not_target_ids).where('id > ?', id).reverse.first
   end
 end

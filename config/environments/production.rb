@@ -88,22 +88,25 @@ Rails.application.configure do
   config.image_link_css = "a.detailOn"
   config.image_css = "#imgEncircle img"
   
-  config.entrylist_1_url = "http://ameblo.jp/3bjr/entrylist.html"  
-  config.entrylist_1_number_url_prefix = "http://ameblo.jp/3bjr/entrylist-"
+  config.entrylist_1_host = "http://ameblo.jp"  
+  config.entrylist_1_url = config.entrylist_1_host + "/3bjr/entrylist.html"  
+  config.entrylist_1_number_url_prefix = config.entrylist_1_host + "/3bjr/entrylist-"
   config.entrylist_1_number_url_suffix = ".html"
   
-  config.entrylist_2_url = "http://ameblo.jp/hachimitsu-rocket/entrylist.html"  
-  config.entrylist_2_number_url_prefix = "http://ameblo.jp/hachimitsu-rocket/entrylist-"
+  config.entrylist_2_host = "http://ameblo.jp"  
+  config.entrylist_2_url = config.entrylist_2_host + "/hachimitsu-rocket/entrylist.html"  
+  config.entrylist_2_number_url_prefix = config.entrylist_2_host + "/hachimitsu-rocket/entrylist-"
   config.entrylist_2_number_url_suffix = ".html"
   
   config.lineblog_ua = "Mozilla/5.0 (Linux; Android 6.0.1; SOV34 Build/39.0.C.0.282) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36"
   config.lineblog_article_link_css = ".article-list a"
   config.lineblog_date_css = "li.article-datetime time"
   config.lineblog_title_css = ".article-title"
-  config.lineblog_image_link_css = "div.article-body div a"
+  config.lineblog_image_link_css = "div.article-body a"
   config.lineblog_image_css = "img"
   
-  config.lineblog_entrylist_url = "http://lineblog.me/rockajaponica"
+  config.lineblog_entrylist_1_url = "http://lineblog.me/rockajaponica"
+  config.lineblog_entrylist_2_url = "http://lineblog.me/hachimitsurocket"
   
   config.tweet_host = "ik1-341-30671.vs.sakura.ne.jp:81"
   config.tweet_consumer_key = "92JghxfQrZwXHHZXBIkalR9jf"
