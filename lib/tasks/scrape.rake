@@ -2,31 +2,34 @@ namespace :scrape do
   desc "Scraping Ameblo"
   
   task :entrylist => :environment do
-    host = SanbeeBlogPhoto::Application.config.entrylist_1_host
-    url = SanbeeBlogPhoto::Application.config.entrylist_1_url
     save_dir = SanbeeBlogPhoto::Application.config.img_path_root
     force_mode = false
-    
+
     s = ScrapeAmeblo.new
-    s.scrape(host, url, save_dir, force_mode, true)
+
+    host = SanbeeBlogPhoto::Application.config.entrylist_1_host
+    url = SanbeeBlogPhoto::Application.config.entrylist_1_url
+    tag = SanbeeBlogPhoto::Application.config.entrylist_1_tag
+    s.scrape(host, url, save_dir, force_mode, true, tag)
     
-    host_hachi = SanbeeBlogPhoto::Application.config.entrylist_2_host
-    url_hachi = SanbeeBlogPhoto::Application.config.entrylist_2_url
+    host = SanbeeBlogPhoto::Application.config.entrylist_2_host
+    url = SanbeeBlogPhoto::Application.config.entrylist_2_url
+    tag = SanbeeBlogPhoto::Application.config.entrylist_2_tag
+    s.scrape(host, url, save_dir, force_mode, true, tag)
     
-    s_hachi = ScrapeAmeblo.new
-    s_hachi.scrape(host_hachi, url_hachi, save_dir, force_mode, true)
-    
-    lineblog = SanbeeBlogPhoto::Application.config.lineblog_entrylist_1_url
     sl = ScrapeLineblog.new
-    sl.scrape(lineblog, save_dir, force_mode, true)
 
-    lineblog_hachi = SanbeeBlogPhoto::Application.config.lineblog_entrylist_2_url
-    sl_hachi = ScrapeLineblog.new
-    sl_hachi.scrape(lineblog_hachi, save_dir, force_mode, true)
+    url = SanbeeBlogPhoto::Application.config.lineblog_entrylist_1_url
+    tag = SanbeeBlogPhoto::Application.config.lineblog_entrylist_1_tag
+    sl.scrape(url, save_dir, force_mode, true, tag)
 
-    lineblog_ame = SanbeeBlogPhoto::Application.config.lineblog_entrylist_3_url
-    sl_ame = ScrapeLineblog.new
-    sl_ame.scrape(lineblog_ame, save_dir, force_mode, true)
+    url = SanbeeBlogPhoto::Application.config.lineblog_entrylist_2_url
+    tag = SanbeeBlogPhoto::Application.config.lineblog_entrylist_2_tag
+    sl.scrape(url, save_dir, force_mode, true, tag)
+
+    url = SanbeeBlogPhoto::Application.config.lineblog_entrylist_3_url
+    tag = SanbeeBlogPhoto::Application.config.lineblog_entrylist_3_tag
+    sl.scrape(url, save_dir, force_mode, true, tag)
   end
   
   task :otherentry, ['number'] => :environment do |task, args|

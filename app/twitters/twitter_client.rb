@@ -2,9 +2,9 @@ require 'twitter'
 
 class TwitterClient
   
-  def tweet(article)
+  def tweet(article, tag)
     begin
-      text = make_tweet(article)
+      text = make_tweet(article, tag)
       
       client = get_client
       
@@ -15,13 +15,14 @@ class TwitterClient
     end
   end
   
-  def make_tweet(article)
+  def make_tweet(article, tag)
     
       if article.member.nil?
         tweet = "ブログ[#{article.title} - (lineblog)]から画像をダウンロードしました！"        
       else
         tweet = "ブログ[#{article.title} - #{article.member.name}]から画像をダウンロードしました！"
       end
+      tweet + "\n #" + tag
       routes = Rails.application.routes.url_helpers
       url = routes.url_for(:controller => "photos", :action => "index", :host => SanbeeBlogPhoto::Application.config.tweet_host, :only_path => false)
       

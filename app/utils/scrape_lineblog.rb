@@ -59,7 +59,7 @@ class ScrapeLineblog
   end
   
 
-  def scrapeArticle(articleUrl, downloadPath, isForce, isTweet)
+  def scrapeArticle(articleUrl, downloadPath, isForce, isTweet, tag)
     
     begin
       p "do get scrapeArticle [#{articleUrl}]"
@@ -116,7 +116,7 @@ class ScrapeLineblog
         
         if isTweet
           twitterClient = TwitterClient.new
-          twitterClient.tweet(savedArticle)
+          twitterClient.tweet(savedArticle, tag)
         end
       end
       
@@ -126,7 +126,7 @@ class ScrapeLineblog
     end
   end
 
-  def scrape(url, downloadPath, isForce, isTweet)
+  def scrape(url, downloadPath, isForce, isTweet, tag)
     begin
       Capybara.register_driver :poltergeist do |app|
         Capybara::Poltergeist::Driver.new(app, {:js_errors => false, :time_out => 5000})
@@ -151,7 +151,7 @@ class ScrapeLineblog
       articleLinks.each do |articleLink|
         articleUrl = articleLink.attribute('href').value
         p articleUrl
-        scrapeArticle(articleUrl, downloadPath, isForce, isTweet)
+        scrapeArticle(articleUrl, downloadPath, isForce, isTweet, tag)
       end
     
     rescue => e
