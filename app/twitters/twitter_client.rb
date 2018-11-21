@@ -22,7 +22,7 @@ class TwitterClient
       else
         tweet = "ブログ[#{article.title} - #{article.member.name}]から画像をダウンロードしました！"
       end
-      tweet + "\n #" + tag
+      tweet = tweet + "\n" + tag
       routes = Rails.application.routes.url_helpers
       url = routes.url_for(:controller => "photos", :action => "index", :host => SanbeeBlogPhoto::Application.config.tweet_host, :only_path => false)
       
