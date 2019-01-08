@@ -46,7 +46,7 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :debug
+  config.log_level = :warn
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -102,7 +102,7 @@ Rails.application.configure do
 
   config.lineblog_ua = "Mozilla/5.0 (Linux; Android 6.0.1; SOV34 Build/39.0.C.0.282) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.81 Mobile Safari/537.36"
   config.lineblog_article_link_css = ".article-list a"
-  config.lineblog_date_css = "li.article-datetime time"
+  config.lineblog_date_css = "p.article-date time"
   config.lineblog_title_css = ".article-title"
   config.lineblog_image_link_css = "div.article-body a"
   config.lineblog_image_css = "img"

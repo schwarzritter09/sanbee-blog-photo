@@ -42,21 +42,24 @@ namespace :scrape do
   end
   
   task :otherentry_hachi, ['number'] => :environment do |task, args|
+    host = SanbeeBlogPhoto::Application.config.entrylist_2_host
     url = SanbeeBlogPhoto::Application.config.entrylist_2_number_url_prefix + args[:number] + SanbeeBlogPhoto::Application.config.entrylist_2_number_url_suffix
     save_dir = SanbeeBlogPhoto::Application.config.img_path_root
     force_mode = false
+    tag = SanbeeBlogPhoto::Application.config.entrylist_2_tag
     
     s = ScrapeAmeblo.new
-    s.scrape(url, save_dir, force_mode, true)
+    s.scrape(host, url, save_dir, force_mode, true, tag)
   end
   
   task :other, ['url'] => :environment do |task, args|
     url = args[:url]
     save_dir = SanbeeBlogPhoto::Application.config.img_path_root
     force_mode = false
+    tag = SanbeeBlogPhoto::Application.config.entrylist_2_tag
     
     s = ScrapeAmeblo.new
-    s.scrape(url, save_dir, force_mode, true)
+    s.scrape(url, save_dir, force_mode, tag, true)
   end
   
   task :article => :environment do
