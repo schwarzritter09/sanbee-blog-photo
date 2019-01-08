@@ -58,6 +58,7 @@ gem 'twitter-bootstrap-rails'
 gem 'nokogiri'
 gem 'poltergeist'
 gem 'capybara'
+gem 'selenium-webdriver'
 
 # Use Paging
 gem 'kaminari'

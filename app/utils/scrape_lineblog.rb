@@ -7,11 +7,6 @@ class ScrapeLineblog
 
   def scrapeImage(articleId, publishDate, imagepageUrl, downloadPath, isForce)
     begin         
-      Capybara.register_driver :poltergeist do |app|
-        Capybara::Poltergeist::Driver.new(app, {:js_errors => false, :time_out => 1000})
-      end
-      Capybara.default_selector = :css
-      
       p "do get scrapeImage [imagepageUrl]"
       # 画像ページからオリジナルサイズ画像を取得
       # 画像が取得済みの場合スキップ
@@ -19,8 +14,7 @@ class ScrapeLineblog
       if isForce || savedImage.nil?
                 
         # 画像ページをJavaScript動作込で取得
-        imagepageSession = Capybara::Session.new(:poltergeist)
-        imagepageSession.driver.headers = { 'User-Agent' =>  SanbeeBlogPhoto::Application.config.lineblog_ua}
+        imagepageSession = Capybara::Session.new(:selenium)
         imagepageSession.visit imagepageUrl
         imagepage = Nokogiri::HTML.parse(imagepageSession.html)
               
@@ -69,8 +63,7 @@ class ScrapeLineblog
       if isForce || savedArticle.nil?
           
         # 記事をJavaScript動作込で取得
-        articleSession = Capybara::Session.new(:poltergeist)
-        articleSession.driver.headers = { 'User-Agent' =>  SanbeeBlogPhoto::Application.config.lineblog_ua} 
+        articleSession = Capybara::Session.new(:selenium)
         articleSession.visit articleUrl
             
         article = Nokogiri::HTML.parse(articleSession.html)
@@ -128,10 +121,18 @@ class ScrapeLineblog
 
   def scrape(url, downloadPath, isForce, isTweet, tag)
     begin
-      Capybara.register_driver :poltergeist do |app|
-        Capybara::Poltergeist::Driver.new(app, {:js_errors => false, :time_out => 5000})
+      Capybara.register_driver :selenium do |app|
+        Capybara::Selenium::Driver.new(app,
+                                       browser: :chrome,
+                                       desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+                                         chrome_options: {
+                                           args: %w(headless disable-gpu window-size=1900,1200 lang=ja no-sandbox disable-dev-shm-usage),
+                                         }
+                                       )
+                                      )
       end
       Capybara.default_selector = :css
+      Capybara.javascript_driver = :headless_chrome
       
       # JavaScript動作込でentrylistを取得
       entrylistSession = Capybara::Session.new(:poltergeist)
