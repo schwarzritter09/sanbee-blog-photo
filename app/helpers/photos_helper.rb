@@ -89,7 +89,7 @@ module PhotosHelper
             end)
           end)
         end)
-        if id <= 4
+        if id <= 3
           concat ( content_tag :div, :id=>"area#{id}", :class=>"panel-body" do
             concat tag_buttons @photo, id
           end)
