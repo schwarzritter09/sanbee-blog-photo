@@ -91,7 +91,7 @@ module PhotosHelper
         end)
         collapseState = "collapse"
         if id <= 3
-          collapseState = "collapse show"
+          collapseState = "collapse in"
         end
         concat ( content_tag :div, :id=>"area#{id}", :class=>"panel-body #{collapseState}" do
           concat tag_buttons @photo, id
