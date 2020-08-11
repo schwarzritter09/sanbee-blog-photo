@@ -77,7 +77,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
-  config.ap_title = "3Bjrブログ画像まとめ"
+  config.ap_title = "アメフラっシブログ画像まとめ"
   
   config.img_path_root = "/var/img/"
   
