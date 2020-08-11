@@ -12,8 +12,8 @@ module PhotosHelper
 
     unitMap = {}
     unitMap[2] = "アメフラっシ"
-    unitMap[4] = "3Bjr"
     unitMap[7] = "その他"
+    unitMap[4] = "3Bjr"
 
     content_tag :div, :class=>"panel-group", :id=>"unit" do
       unitMap.each do |id, unit|
@@ -69,8 +69,8 @@ module PhotosHelper
 
     unitMap = {}
     unitMap[2] = "アメフラっシ"
-    unitMap[4] = "3Bjr"
     unitMap[7] = "その他"
+    unitMap[4] = "3Bjr"
 
     content_tag :div, :class=>"panel-group", :id=>"tag" do
       unitMap.each do |id, unit|
@@ -84,7 +84,7 @@ module PhotosHelper
           end)
         end)
         collapseState = "collapse"
-        if id <= 3
+        if id = 4
           collapseState = "collapse in"
         end
         concat ( content_tag :div, :id=>"area#{id}", :class=>"panel-body #{collapseState}" do
