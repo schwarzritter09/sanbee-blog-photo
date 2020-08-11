@@ -11,11 +11,8 @@ module PhotosHelper
     p searchMemberMap
 
     unitMap = {}
-    unitMap[1] = "はちみつロケット"
     unitMap[2] = "アメフラっシ"
-    unitMap[3] = "ex.ロッカジャポニカ"
     unitMap[4] = "3Bjr"
-    unitMap[5] = "ロッカジャポニカ"
     unitMap[7] = "その他"
 
     content_tag :div, :class=>"panel-group", :id=>"unit" do
@@ -71,11 +68,8 @@ module PhotosHelper
   def tag_panel(photo)
 
     unitMap = {}
-    unitMap[1] = "はちみつロケット"
     unitMap[2] = "アメフラっシ"
-    unitMap[3] = "ex.ロッカジャポニカ"
     unitMap[4] = "3Bjr"
-    unitMap[5] = "ロッカジャポニカ"
     unitMap[7] = "その他"
 
     content_tag :div, :class=>"panel-group", :id=>"tag" do
