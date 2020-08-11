@@ -84,7 +84,7 @@ module PhotosHelper
           end)
         end)
         collapseState = "collapse"
-        if id = 4
+        if id == 4
           collapseState = "collapse in"
         end
         concat ( content_tag :div, :id=>"area#{id}", :class=>"panel-body #{collapseState}" do
